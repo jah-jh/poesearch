@@ -1,0 +1,26 @@
+version: '3'
+services:
+        poedsearch:
+                build:
+
+                        context: ./poedsearch
+                ports:
+                        - "3306:3306"
+                volumes:
+                        - poedsearch_get_id:/var/lib/mysql
+        poedsearch_find:
+                depends_on:
+                       - poedsearch
+                build:
+                        context: ./poedsearch_find
+                        #command: >
+                        # /bin/bash -c "
+                        # while ! nc -z poedsearch 3306;
+                        # do
+                        # echo sleeping;
+                        #sleep 1;
+                        #done;
+                        #echo Connected!;
+                        #  "
+volumes:
+        poedsearch_get_id:
